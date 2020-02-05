@@ -14,7 +14,9 @@ int main (int argc, const char* argv[]) {
 
   int c, tabs;
   while ((c = fgetc(fin)) != EOF) {
-    if (c == ' ') {
+    if (c != ' ' && c != '\t') {
+      fputc(c, fout);
+    } else if (c == ' ') {
       tabs++;
       while (tabs >= TABTOSPACE) {
         fputc('\t', fout);
