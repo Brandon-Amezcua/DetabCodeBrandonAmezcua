@@ -27,7 +27,7 @@ printf("Test 2\n");
       }
       while (nspaces-- > 0) {
         fputc(' ', fout);
-      }
+      } 
     } else {
       fputc(c, fout);
     }

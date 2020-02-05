@@ -13,7 +13,7 @@ int main (int argc, const char* argv[]) {
   int c;
   int j;
   int state = 0;
-  while ((c = fgetc(fin)) != EOF) {
+  while ((c = fgetc(fin)) != EOF) { 
 
     if (c != '/' || c != '\"' || c != '*') {// if c is not a special char then just put it
       fputc(c, fin);
