@@ -21,13 +21,14 @@ printf("Test 2\n");
         ++count;
       }
       int ntabs = count / n;
-      int nspaces = count % 2;
+      int nspaces = count % n;
       while (ntabs-- > 0) {
         fputc('\t', fout);
       }
       while (nspaces-- > 0) {
         fputc(' ', fout);
-      } 
+      }
+      fputc(c,fout);
     } else {
       fputc(c, fout);
     }

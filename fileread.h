@@ -9,7 +9,6 @@ bool openfiles(int argc, const char* argv[], FILE** pfin, FILE** pfout, int* n) 
   }
   *pfin = fopen(argv[1], "r");
   *pfout = fopen(argv[2], "w");
-  printf("both files opened");
   if (argc == 4) {
     *n = atoi(argv[3]);
   } else {

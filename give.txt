@@ -1,2 +1,7 @@
-Hello
+Hello "stuff"
+//hi
 hi
+
+"//"
+
+end of test

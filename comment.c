@@ -13,11 +13,14 @@ int main (int argc, const char* argv[]) {
   int c;
   int j;
   int state = 0;
-  while ((c = fgetc(fin)) != EOF) { 
+  int star = 0;
+  while ((c = fgetc(fin)) != EOF) {
 
-    if (c != '/' || c != '\"' || c != '*') {// if c is not a special char then just put it
-      fputc(c, fin);
-    } else if (c =='\"' && state == 0) { //checks to see if it is at the start of a string, it would ignore any double backslashes
+    if (c != '/' && c != '\"' && c != '*') {// if c is not a special char then just put it
+      fputc(c, fout);
+    }
+
+    if (c =='\"' && state == 0) { //checks to see if it is at the start of a string, it would ignore any double backslashes
       state = 1;
       fputc(c,fout);
 
@@ -25,7 +28,9 @@ int main (int argc, const char* argv[]) {
       state = 0;
       fputc(c,fout);
 
-    } else if (c == '/' && state == 0) { //sees that code has hit a backslash
+    }
+
+    if (c == '/' && state == 0) { //sees that code has hit a backslash
       c = fgetc(fin);
 
       if (c == '/' && state == 0) { // sees that the next char is another backslash
@@ -36,23 +41,11 @@ int main (int argc, const char* argv[]) {
          }
 
       } else if (c == '*' && state == 0) { //sees that the next char is a star
-        for (int i = 0; i >= 5; i++) { //loop that runs until it hits a star
-          while (c != '*') {
-            c = fgetc(fin);
-            i = 0;
+        while ((c == fgetc(fin)) != '*' && (c == fgetc(fin)) != EOF) {}
 
-          }
-          if (c == '*') { // once it hits a star it will check the next char
-            j = fgetc(fin);
-            if (j == '/') { // if the char is a backslash it would end the infinite loop and start reading again
-              i = 10;
-            }
-          }
-        }
       } else {
-        fputc('/', fout);
-        fputc(c, fout);
-
+        fputc(c,fout);
+        printf("%d",c);
       }
     }
   }
