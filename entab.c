@@ -8,47 +8,32 @@ int main (int argc, const char* argv[]) {
   FILE* fin;
   FILE* fout;
   int n;
-  printf("Test 1\n");
+
   bool ok = openfiles(argc, argv, &fin, &fout, &n);
   if (!ok) {exit(1);}
-printf("Test 2\n");
+
   int c;
   while ((c = fgetc(fin)) != EOF) {
 
-    if (c == ' ') {
+    if (c != ' ') {
+      fputc(c,fout);
+    } else {
       int count = 1;
       while ((c = fgetc(fin)) != EOF && (c = fgetc(fin)) == ' ') {
         ++count;
       }
-      int ntabs = count / n;
-      int nspaces = count % n;
+
+      int ntabs = count / TABTOSPACE;
+      int nspaces = count % TABTOSPACE;
+
       while (ntabs-- > 0) {
         fputc('\t', fout);
       }
       while (nspaces-- > 0) {
         fputc(' ', fout);
       }
-      fputc(c,fout);
-    } else {
-      fputc(c, fout);
     }
 
-    /*if (c != ' ' && c != '\t') {
-      fputc(c, fout);
-    } else if (c == ' ') {
-      tabs++;
-      while (tabs >= TABTOSPACE) {
-        fputc('\t', fout);
-      }
-    } else if (tabs > 0) {
-      while (tabs > 0) {
-        fputc(' ', fout);
-        tabs--;
-      }
-      fputc(c,fout);
-    } else {
-      fputc(c, fout);
-    }*/
   }
 
   closefiles(fin, fout);
